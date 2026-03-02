@@ -1,7 +1,8 @@
 public class Hello {
     public static void main(string[] args){
-        System.out.println("Hello world");
-        System.out.println("Addition"+(2+3));
-        System.out.println("Making changes");
+int x = 5;
+int y = 6;
+int sum = x + y;
+System.out.println("Sum is: " + sum); // Print the sum of x + 
     }
 }
