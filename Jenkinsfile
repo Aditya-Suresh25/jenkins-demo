@@ -1,36 +1,24 @@
 pipeline {
     agent any
-
     stages {
-        stage('Fetching File..') {
+        stage('Checkout') {
             steps {
-               git branch: 'master', url : "https://github.com/Aditya-Suresh25/jenkins-demo.git"
+                // Quotes added to branch and url strings
+                git branch: 'master', url: 'https://github.com/Aditya-Suresh25/jenkins-demo.git'
             }
         }
-        stage('Build') {
+        stage('Publishing') {
             steps {
-                echo 'Building Project....'
-                bat "javac Hello.java"
+                // Added target: key and fixed string quoting/capitalization
+                publishHTML(target: [
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: false,
+                    reportDir: '.',
+                    reportFiles: 'index.html',
+                    reportName: 'Sample Html Page Jenkins'
+                ])
             }
-        }
-        stage('Executing..') {
-            steps {
-                echo 'Executing Program'
-                bat "java Hello"
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying Project..'
-            }
-        }
-    }
-    post{
-        success{
-            echo "Pipeline executed successfully!"
-        }
-        failure{
-             echo "Pipeline failed"
         }
     }
 }
